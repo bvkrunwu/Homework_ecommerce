@@ -1,0 +1,58 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Электроника",
+        "description": "Смартфоны, планшеты, компьютеры"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Одежда",
+        "description": "Мужская, женская и детская одежда"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Продукты питания",
+        "description": "Свежие продукты и напитки"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Бытовая химия",
+        "description": "Средства для уборки и стирки"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Спортивные товары",
+        "description": "Инвентарь и экипировка"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Товары для дома",
+        "description": "Интерьер и бытовые принадлежности"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "name": "Детские игрушки",
+        "description": "Игрушки для детей разного возраста"
+    }
+}
+]
