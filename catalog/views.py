@@ -8,7 +8,7 @@ def home(request):
     latest_products = Product.objects.order_by("-created_at")[:5]
     for product in latest_products:
         print(f"Последний продукт: {product.name}, Дата создания: {product.created_at}")
-    return render(request, "home.html", {"latest_products": latest_products})
+    return render(request, "catalog/home.html", {"latest_products": latest_products})
 
 
 def contacts(request):
@@ -17,4 +17,4 @@ def contacts(request):
         phone = request.POST.get("phone")
         message = request.POST.get("message")
         return HttpResponse(f'Привет {name}! Ваш номер: {phone}.  Сообщение: " {message} " получено.')
-    return render(request, "contacts.html")
+    return render(request, "catalog/contacts.html")
