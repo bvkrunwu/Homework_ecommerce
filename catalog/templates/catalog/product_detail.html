@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Детализация продукта{% endblock %}
+
+{% block content %}
+<main>
+    <div class="card" style="width: 18rem;">
+            <img src="{{ student.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+            </div>
+        </div>
+</main>
+{% endblock %}
