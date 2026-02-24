@@ -1,0 +1,54 @@
+{% extends 'blog_base.html' %}
+
+{% block title %}Блоги{% endblock %}
+
+{% block content %}
+<div class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Добро пожаловать в мир современных технологий и удивительных устройств!</h1>
+            <p class="lead text-body-secondary">Наш блог посвящен всему, что касается мира техники и гаджетов. Мы
+                регулярно публикуем обзоры новинок электроники,
+                полезные советы по выбору техники, рекомендации по уходу за устройствами и интересные истории из мира
+                высоких
+                технологий.
+                Хотите разобраться, какой смартфон купить или какую камеру выбрать для путешествий? А может быть, ищете
+                информацию о
+                новейших ноутбуках и умных домах? Наш блог станет надежным проводником в мире современной цифровой
+                индустрии.
+                Присоединяйтесь к нам, следите за обновлениями и оставайтесь в курсе последних тенденций в области
+                потребительских
+                электронных устройств. Вместе мы сделаем вашу жизнь удобнее и интереснее благодаря новым технологиям!
+                Желаем приятного чтения и увлекательных открытий вместе с нами!</p>
+            <p>
+                <a class="btn btn-primary" href="{% url 'blog:blog_create' %}" role="button">Создать блог</a>
+            </p>
+        </div>
+    </div>
+</div>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {% for blog in object_list %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-2">{{ blog.title }}</h5>
+                        <p class="card-text flex-grow-1">{{ blog.content|truncatechars:100 }}</p>
+                        <div class="mt-auto">
+                            <a href="{% url 'blog:blog_detail' blog.pk %}"
+                               class="btn btn-primary">Подробнее</a>
+                            <a href="{% url 'blog:blog_update' blog.pk %}"
+                               class="btn btn-primary">Редактировать</a>
+                            <a href="{% url 'blog:blog_delete' blog.pk %}"
+                               class="btn btn-primary">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

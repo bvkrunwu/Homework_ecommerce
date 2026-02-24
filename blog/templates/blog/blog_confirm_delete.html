@@ -1,0 +1,24 @@
+{% extends 'blog_base.html' %}
+
+{% block title %}Создание блога{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <p class="card-text"> Действительно хотите удалить {{ object.title }}</p>
+                    <div class="card-body">
+                        {% csrf_token %}
+                    </div>
+                    <div class="mt-auto">
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                        <a href="{% url 'blog:blog_list' %}" class="btn btn-primary">Отмена</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

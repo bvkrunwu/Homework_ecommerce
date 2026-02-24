@@ -1,0 +1,20 @@
+{% extends 'blog_base.html' %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+<main>
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title mb-2">{{ blog.title }}</h5>
+                <p class="card-text flex-grow-1">{{ blog.content|truncatechars:100 }}</p>
+                <div class="mt-auto"> <!-- Контент прижимается вниз -->
+                    <a href="{% url 'blog:blog_list' %}" class="btn btn-primary">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
