@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
@@ -24,6 +25,17 @@ class BlogDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.views_count += 1
         self.object.save()
+
+        if self.object.views_count == 100:
+            try:
+                subject = f"Поздравляем: Ваша статья '{object.title}' достигла 100 просмотров!"
+                message = "Ваше творчество оценили читатели! Продолжайте в том же духе"
+                from_email = "admin@examplr.com"
+                recipient_list = ["recipient@example.com"]
+
+                send_mail(subject, message, from_email, recipient_list)
+            except Exception as e:
+                print(f"Ошибка отправки email: {e}")
         return self.object
 
 
