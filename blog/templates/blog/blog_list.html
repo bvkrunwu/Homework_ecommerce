@@ -1,5 +1,5 @@
 {% extends 'blog_base.html' %}
-
+{% load my_tags %}
 {% block title %}Блоги{% endblock %}
 
 {% block content %}
@@ -32,7 +32,8 @@
             {% for blog in object_list %}
             <div class="col">
                 <div class="card h-100">
-                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                    <img src="{{ blog.preview_image | media_filter }}" class="card-img-top img-fluid"
+                         alt="{{ blog.title }}">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title mb-2">{{ blog.title }}</h5>
                         <p class="card-text flex-grow-1">{{ blog.content|truncatechars:100 }}</p>
