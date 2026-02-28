@@ -1,28 +1,31 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.views.generic import DetailView, ListView, TemplateView
 
 from .models import Product
 
 
-def home(request):
-    latest_products = Product.objects.order_by("-created_at")[:5]
-    for product in latest_products:
-        print(f"Последний продукт: {product.name}, Дата создания: {product.created_at}")
-    all_products = Product.objects.all()
-    context = {"latest_products": latest_products, "products": all_products}
-    return render(request, "catalog/home.html", context)
+class ProductListView(ListView):
+    model = Product
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        latest_products = self.model.objects.order_by("-created_at")[:5]
+        context["latest_products"] = latest_products
+        for product in latest_products:
+            print(f"Последний продукт: {product.name}, Дата создания: {product.created_at}")
+        return context
 
 
-def contacts(request):
-    if request.method == "POST":
+class ContactsTemplateView(TemplateView):
+    template_name = "catalog/contacts.html"
+
+    def post(self, request):
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         message = request.POST.get("message")
-        return HttpResponse(f'Привет {name}! Ваш номер: {phone}.  Сообщение: " {message} " получено.')
-    return render(request, "catalog/contacts.html")
+        response_message = f'Привет {name}! Ваш номер: {phone}.  Сообщение: " {message} " получено.'
+        return HttpResponse(response_message)
 
 
-def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "catalog/product_detail.html", context)
+class ProductDetailView(DetailView):
+    model = Product
