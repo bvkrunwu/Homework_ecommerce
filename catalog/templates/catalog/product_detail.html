@@ -1,20 +1,46 @@
-{% extends 'base.html' %}
-
-{% block title %}Детализация продукта{% endblock %}
+{% extends 'catalog_base.html' %}
+{% load my_tags %}
+{% block title %}Описание продукта{% endblock %}
 
 {% block content %}
-<main>
-    <div class="col">
-        <div class="card h-100">
-            <img src="{{ product.images.url }}" class="card-img-top" alt="{{ product.name }}">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title mb-2">{{ product.name }}</h5>
-                <p class="card-text flex-grow-1">{{ product.description }}</p>
-                <div class="mt-auto"> <!-- Контент прижимается вниз -->
-                    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад</a>
+<section>
+    <div class="container">
+        <h1 class="text-center font-monospace pt-5 pb-5">Описание продукта</h1>
+        <div class="row">
+            <div class="col-5">
+                <div class="card">
+                    <img src="{{ product.image | media_filter }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад</a>
+                        <a href="{% url 'catalog:product_update' product.pk %}"
+                           class="btn btn-primary">Редактировать</a>
+                        <a href="{% url 'catalog:product_delete' product.pk %}"
+                           class="btn btn-danger">Удалить</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</main>
+</section>
+
+<!--<main>-->
+<!--    <div class="col">-->
+<!--        <div class="card h-100">-->
+<!--            <img src="{{ product.image | media_filter }}" alt="{{ product.name }}">-->
+<!--            <div class="card-body d-flex flex-column">-->
+<!--                <h5 class="card-title mb-2">{{ product.name }}</h5>-->
+<!--                <p class="card-text flex-grow-1">{{ product.description }}</p>-->
+<!--                <div class="mt-auto"> &lt;!&ndash; Контент прижимается вниз &ndash;&gt;-->
+<!--                    <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад</a>-->
+<!--                    <a href="{% url 'catalog:product_update' product.pk %}"-->
+<!--                       class="btn btn-primary">Редактировать</a>-->
+<!--                    <a href="{% url 'catalog:product_delete' product.pk %}"-->
+<!--                       class="btn btn-primary">Удалить</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
 {% endblock %}

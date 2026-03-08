@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Skystore{% endblock %}</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <!-- Включаем header -->
-    {% include 'catalog/header.html' %}
+    {% include 'catalog/catalog_header.html' %}
 
     <!-- Основной контент страницы -->
     <main class="content">
@@ -18,7 +19,7 @@
     </main>
 
     <!-- Включаем footer -->
-    {% include 'catalog/footer.html' %}
+    {% include 'catalog/catalog_footer.html' %}
 
 <script src="/static/js/bootstrap.bundle.min.js"></script>
 </body>
