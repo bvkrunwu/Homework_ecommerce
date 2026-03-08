@@ -1,7 +1,15 @@
 from django.http import HttpResponse
-from django.views.generic import DetailView, ListView, TemplateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
 
-from .models import Product
+from catalog.forms import ProductForm
+from catalog.models import Product
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy("catalog:product_list")
 
 
 class ProductListView(ListView):
@@ -16,6 +24,24 @@ class ProductListView(ListView):
         return context
 
 
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    success_url = reverse_lazy("catalog:product_list")
+
+    def get_success_url(self):
+        return reverse("catalog:product_detail", args=[self.kwargs.get("pk")])
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("catalog:product_list")
+
+
 class ContactsTemplateView(TemplateView):
     template_name = "catalog/contacts.html"
 
@@ -25,7 +51,3 @@ class ContactsTemplateView(TemplateView):
         message = request.POST.get("message")
         response_message = f'Привет {name}! Ваш номер: {phone}.  Сообщение: " {message} " получено.'
         return HttpResponse(response_message)
-
-
-class ProductDetailView(DetailView):
-    model = Product
