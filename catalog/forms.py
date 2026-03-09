@@ -1,10 +1,9 @@
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.forms import BooleanField, ClearableFileInput, ModelForm
 from django.utils.deconstruct import deconstructible
 
 from catalog.models import Product
-
-FORBIDDEN_WORDS = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "бесплатно", "обман", "полиция", "радар"]
 
 
 @deconstructible
@@ -53,14 +52,16 @@ class ProductForm(StyleFormMixin, ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data["name"]
-        for word in FORBIDDEN_WORDS:
+        forbidden_words = settings.FORBIDDEN_WORDS
+        for word in forbidden_words:
             if word.lower() in name.lower():
                 raise ValidationError(f"Название содержит запрещённое слово '{word}'.")
         return name
 
     def clean_description(self):
         description = self.cleaned_data["description"]
-        for word in FORBIDDEN_WORDS:
+        forbidden_words = settings.FORBIDDEN_WORDS
+        for word in forbidden_words:
             if word.lower() in description.lower():
                 raise ValidationError(f"Описание содержит запрещённое слово '{word}'.")
         return description
