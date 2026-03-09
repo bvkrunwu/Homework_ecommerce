@@ -1,6 +1,12 @@
 {% extends 'catalog_base.html' %}
 
-{% block title %}Создание блога{% endblock %}
+{% block title %}
+{% if object %}
+Редактирование продукта
+{% else %}
+Создание продукта
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -10,6 +16,7 @@
                 <div class="form">
                     <div class="form-body">
                         {% csrf_token %}
+                        {{ form.non_field_errors }}
                         {{ form.as_p }}
                     </div>
                     <button type="submit" class="btn btn-primary">
