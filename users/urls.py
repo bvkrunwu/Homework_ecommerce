@@ -2,7 +2,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from users.apps import UsersConfig
-from users.views import UserCreateView, email_verification, UserDetailView, UserUpdateView
+from users.views import UserCreateView, UserDetailView, UserUpdateView, email_verification
 
 app_name = UsersConfig.name
 
