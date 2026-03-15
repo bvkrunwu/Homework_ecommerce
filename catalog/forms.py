@@ -39,6 +39,7 @@ class ProductForm(StyleFormMixin, ModelForm):
     class Meta:
         model = Product
         fields = "__all__"
+        exclude = ["owner"]
         widgets = {
             "image": ClearableFileInput(attrs={"accept": "image/jpeg,image/png"}),
         }
