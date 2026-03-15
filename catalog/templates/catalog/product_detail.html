@@ -14,7 +14,7 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">{{ product.description }}</p>
                         <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Назад</a>
-                        {% if perms.catalog.can_unpublish_product or catalog.can_delete_product %}
+                        {% if can_edit_delete %}
                         <a href="{% url 'catalog:product_update' product.pk %}"
                            class="btn btn-primary">Редактировать</a>
                         <a href="{% url 'catalog:product_delete' product.pk %}"
