@@ -71,3 +71,9 @@ class ProductForm(StyleFormMixin, ModelForm):
         if purchase_price is not None and purchase_price < 0:
             raise ValidationError(f"Цена не может быть отрицательной '{purchase_price}'.")
         return purchase_price
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ("is_published",)

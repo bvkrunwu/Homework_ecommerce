@@ -11,6 +11,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.CASCADE, related_name="products", verbose_name="Категория"
     )
+    is_published = models.BooleanField(default=False, verbose_name="Опубликован")
 
     def __str__(self):
         return f"{self.name} ({self.category.name}), Цена покупки: {self.purchase_price} руб."
@@ -18,6 +19,10 @@ class Product(models.Model):
     class Meta:
         verbose_name = "продукт"
         verbose_name_plural = "продукты"
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+            ("can_delete_product", "Can delete product"),
+        ]
 
 
 class Category(models.Model):
