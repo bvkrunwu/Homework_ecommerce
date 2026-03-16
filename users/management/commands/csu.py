@@ -1,13 +1,23 @@
+import os
+
 from django.core.management import BaseCommand
+from dotenv import load_dotenv
 
 from users.models import User
+
+load_dotenv()
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        user = User.objects.create(email="")
-        user.set_password("")
+        email = os.getenv("ADMIN_EMAIL")
+        password = os.getenv("ADMIN_PASSWORD")
+
+        user = User.objects.create(email=email)
+        user.set_password(password)
         user.is_active = True
         user.is_staff = True
         user.is_superuser = True
         user.save()
+
+        self.stdout.write(self.style.SUCCESS("Superuser created"))
