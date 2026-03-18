@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, ListView, T
 
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product
+from catalog.services import get_products_from_cache
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -27,6 +28,9 @@ class ProductListView(ListView):
         for product in latest_products:
             print(f"Последний продукт: {product.name}, Дата создания: {product.created_at}")
         return context
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
