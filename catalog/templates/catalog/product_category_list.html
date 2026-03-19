@@ -1,0 +1,35 @@
+{% extends 'catalog_base.html' %}
+{% load my_tags %}
+
+{% block title %}Продукты в категории "{{ category.name }}"{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Категория: {{ category.name }}</h2>
+    {% if category.description %}
+    <p class="text-muted">{{ category.description }}</p>
+    {% endif %}
+    <p><strong>Всего продуктов:</strong> {{ total_products }}</p>
+
+    {% if products %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card">
+                <img src="{{ product.image | media_filter }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        В этой категории пока нет опубликованных продуктов.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
